@@ -56,6 +56,7 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'registration_requires_captcha' =>env('REQUIRE_RECAPTCHA',false),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

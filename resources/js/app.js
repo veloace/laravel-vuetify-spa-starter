@@ -11,9 +11,11 @@ import router  from './router';
 import Vuetify from 'vuetify'
 import VueAnalytics from 'vue-analytics'
 import Vuelidate from 'vuelidate'
+import InvisibleRecaptcha from 'vue-invisible-recaptcha';
 
 window.Vue = require('vue');
 let ga = process.env.MIX_GOOGLE_ANALYTICS_SITE;
+let recaptcha = process.env.MIX_RECAPTCHA;
 if(ga)
 {
     window.Vue.use(VueAnalytics, {
@@ -21,6 +23,11 @@ if(ga)
         checkDuplicatedScript: true,
         router
     });
+}
+
+if(recaptcha)
+{
+    Vue.component('invisible-recaptcha', InvisibleRecaptcha);
 }
 
 window.Vue.use(Vuetify);
@@ -53,6 +60,7 @@ auth.boot()//make sure auth service is booted before we load vue or vue router
             el: '#app',
             router,
             data: () => ({
+                recaptcha:recaptcha,
                 drawer: null,
                 appName:window.appName,
                 apiRoutes:window.apiRoutes,
