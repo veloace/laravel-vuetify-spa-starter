@@ -14,8 +14,8 @@ import Vuelidate from 'vuelidate'
 import InvisibleRecaptcha from 'vue-invisible-recaptcha';
 
 window.Vue = require('vue');
-let ga = process.env.MIX_GOOGLE_ANALYTICS_SITE;
-let recaptcha = process.env.MIX_RECAPTCHA;
+const ga = process.env.MIX_GOOGLE_ANALYTICS_SITE;
+const recaptcha = process.env.MIX_RECAPTCHA;
 if(ga)
 {
     window.Vue.use(VueAnalytics, {
@@ -25,11 +25,7 @@ if(ga)
     });
 }
 
-if(recaptcha)
-{
-    Vue.component('invisible-recaptcha', InvisibleRecaptcha);
-}
-
+Vue.component('invisible-recaptcha', InvisibleRecaptcha);
 window.Vue.use(Vuetify);
 window.Vue.use(VueRouter);
 window.Vue.use(Vuelidate);

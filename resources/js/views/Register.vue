@@ -61,7 +61,15 @@
         <p>
             By clicking "Register Now", you will create an account with {{$root.appName}} and certify that you agree to our <a href="/terms" target="_blank" >Terms and Conditions</a>
         </p>
-        <v-btn large block color="success" @click.native="register" :disabled="$root.isLoading">
+        <div v-if="$root.recaptcha">
+            <invisible-recaptcha :sitekey="$root.recaptcha"  :callback="register"
+                                 class="v-btn v-btn--block v-btn--large theme--light success btn-recaptcha" type="submit"  :disabled="$root.isLoading">
+                Register Now
+            </invisible-recaptcha>
+
+
+        </div>
+        <v-btn v-else large block color="success" @click.native="register" :disabled="$root.isLoading">
             <span>Register Now</span>
         </v-btn>
 
@@ -118,11 +126,11 @@
             }
         },
         methods: {
-            register() {
+            register(recaptchaToken=null) {
                 if(this.$refs.form.validate())
                 {
                 this.$root.isLoading=true;
-                    this.$root.auth.register(this.newUser.name,this.newUser.email, this.newUser.password, this.newUser.password_confirmation)
+                    this.$root.auth.register(this.newUser.name,this.newUser.email, this.newUser.password, this.newUser.password_confirmation,recaptchaToken)
                         .then((result)=>{
                             if(result.success)
                             {//if successful
@@ -161,3 +169,9 @@
     }
 
 </script>
+<style>
+    .btn-recaptcha div:first-child
+    {
+        z-index: 100000;
+    }
+</style>

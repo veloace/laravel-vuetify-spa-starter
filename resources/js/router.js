@@ -58,7 +58,6 @@ const routes =[
         beforeEnter:guestRequired
 
     },
-
     {
         path: '/home',
         component: require('./views/Home.vue').default,

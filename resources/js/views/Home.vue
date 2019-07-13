@@ -1,5 +1,9 @@
 <template>
-    <router-link :to="{name:'register'}">Register</router-link>
+    <div>
+        <h1>This is your homepage!</h1>
+        <p>Put stuff here!</p>
+    </div>
+
 </template>
 <script>
 

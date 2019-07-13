@@ -62,10 +62,11 @@ class Recaptcha implements Rule
      */
     protected function validateRecaptcha($recaptcha)
     {
+        $grecaptchaClient = new Client(['base_uri' => 'https://www.google.com']);
+
         try {
-            $grecaptchaClient = new Client(['base_uri' => 'https://www.google.com']);
             $gresponse = $grecaptchaClient->request('POST', '/recaptcha/api/siteverify', ['form_params' => [
-                'secret' => config('app.GOOGLE_RECAPTCHA_SECRET_KEY'),
+                'secret' => config('app.RECAPTCHA_SECRET_KEY'),
                 'response' => $recaptcha
             ]]);
             return (json_decode($gresponse->getBody())->success);

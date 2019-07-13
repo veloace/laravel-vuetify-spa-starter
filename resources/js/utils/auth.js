@@ -72,14 +72,15 @@ class AuthService {
             })
     }
 
-    register(name, email, password, password_confirmation)
+    register(name, email, password, password_confirmation,recaptchaToken=null)
     {
 
       return  axios.post('/webAPI/register',{
             name:name,
             email:email,
             password:password,
-            password_confirmation:password_confirmation
+            password_confirmation:password_confirmation,
+            'recaptcha_token':recaptchaToken
         })
             .then((response)=>{
                 this.user.is_authenticated=true;
