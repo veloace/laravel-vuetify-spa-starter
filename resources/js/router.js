@@ -63,6 +63,13 @@ const routes =[
         component: require('./views/Home.vue').default,
         name:'home'
     },
+    {
+        path: '/password',
+        component: require('./views/ChangePassword.vue').default,
+        name:'changePassword',
+        beforeEnter:loginRequired
+
+    },
 ];
 
 

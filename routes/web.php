@@ -21,10 +21,31 @@ Route::prefix('webAPI')->group(function () {
     | group only.
     |--------------------------------------------------------------------------
     */
+
+    //----------------UNAUTHENTICATED ROUTES------------------------
+
+    //place routes that do NOT require user Authentication in this area
     Auth::routes();
-    Route::get('/user', function(){
-        return \Illuminate\Support\Facades\Auth::user();
-    })->name('user')->middleware('auth:web');
+
+    //----------------END UNAUTHENTICATED ROUTES------------------------
+    Route::group(['middleware' => 'auth:web'], function()
+    {//----------------AUTHENTICATED ROUTES------------------------
+
+        //put routes here that require user authentication. In other words, if the user has to be logged in to access
+
+        Route::get('/user', function(){
+            return \Illuminate\Support\Facades\Auth::user();
+        })->name('user');//this router is used to check user session status
+
+        Route::post('/changePassword','UserAccountController@changePassword')->name('changePassword');
+
+
+    });//----------------END UNAUTHENTICATED ROUTES------------------------
+
+
+
+
+
 
 
 });//end WEB API Routes

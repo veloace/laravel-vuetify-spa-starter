@@ -74,15 +74,16 @@ auth.boot()//make sure auth service is booted before we load vue or vue router
                 /**
                  * Global function to make an API call
                  *
+                 * always returns an object
+                 *
                  * @param routeName the route name as it is in Laravel
                  * @param data nullable the data to send to the API
                  * @param displayLoader
                  * @param displayPopoverOnSuccess
                  * @param displayPopoverOnFail
-                 * @returns {*}
                  * @param successMessage
                  * @param errorMessage
-                 * @returns {*}
+                 * @returns {success,data,errors}
                  */
                 makeAPICall(routeName, data=null, displayLoader=true, displayPopoverOnSuccess=true, displayPopoverOnFail=true, successMessage=null, errorMessage=null)
                 {
@@ -115,9 +116,11 @@ auth.boot()//make sure auth service is booted before we load vue or vue router
                                 if(displayPopoverOnSuccess)
                                 {
                                     if(!successMessage)
-                                    {
-                                        successMessage = "All Done!";
+                                    {//if you did not specify a success message, we'll try to find one.
+                                        //we'll check to see if the server sent a success message. If so, we'll use it. IF not, we'll just use a generic message
+                                        successMessage = !!(response.data.success_message) ? response.data.success_message: "All Done!";
                                     }
+
                                     this.displayNotification(successMessage,'green',5000)
                                 }
                                 return {
@@ -190,5 +193,5 @@ auth.boot()//make sure auth service is booted before we load vue or vue router
             }
         });
 
-    });
+    });//end then
 

@@ -107,6 +107,35 @@
                         </v-list-tile-content>
                     </v-list-tile>
 
+                    <v-list-group v-if="$root.auth.user.is_authenticated">
+
+                        <template v-slot:activator>
+
+                            <v-list-tile dark>
+                                <v-list-tile-action>
+                                    <v-icon>account_circle</v-icon>
+                                </v-list-tile-action>
+                                <v-list-tile-content>
+
+                                <v-list-tile-title>Your Account</v-list-tile-title>
+                                </v-list-tile-content>
+                            </v-list-tile>
+                        </template>
+
+
+                        <v-list-tile :to="{name:'changePassword'}" dark>
+                            <v-list-tile-action>
+                                <v-icon>lock</v-icon>
+                            </v-list-tile-action>
+
+                            <v-list-tile-content>
+                                <v-list-tile-title>Change Password</v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+
+
+                    </v-list-group>
+
 
 
                 </v-list>
